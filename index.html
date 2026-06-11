@@ -61,21 +61,22 @@
     }
 
     p {
-      font-size: clamp(18px, 4.5vw, 24px);
+      font-size: clamp(22px, 5vw, 32px);
       margin: 8px 0;
-      opacity: 0.9;
       line-height: 1.4;
+      font-weight: 700;
     }
 
     .subtext {
-      font-size: clamp(14px, 3.5vw, 18px);
-      opacity: 0.7;
-      margin-top: 12px;
+      font-size: clamp(16px, 4vw, 22px);
+      opacity: 0.85;
+      margin-top: 16px;
+      line-height: 1.4;
     }
 
     /* Custom Unique Styles */
     .enlarged-text {
-      font-size: clamp(56px, 15vw, 90px);
+      font-size: clamp(60px, 16vw, 100px);
       font-weight: 900;
       letter-spacing: -1px;
       animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -98,8 +99,8 @@
     .tq-input {
       background: transparent;
       border: none;
-      border-bottom: 3px solid #f5ebe6;
-      color: #f5ebe6;
+      border-bottom: 3px solid #d7ccc8;
+      color: #d7ccc8;
       font-size: 32px;
       text-align: center;
       width: 120px;
@@ -110,15 +111,16 @@
 
     .submit-btn {
       display: block;
-      margin: 20px auto 0;
-      padding: 12px 30px;
-      background: #f5ebe6;
-      color: #000;
+      margin: 25px auto 0;
+      padding: 14px 36px;
+      background: #ffb7ce;
+      color: #4a3728;
       border: none;
       border-radius: 999px;
-      font-size: 16px;
+      font-size: 18px;
       font-weight: 700;
       cursor: pointer;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
     }
 
     /* Animations */
@@ -132,132 +134,115 @@
       to { transform: translateY(0) scale(1); opacity: 1; }
     }
 
-    /* Theme Combinations */
-    .bg-brown { background-color: #4a3728; }
-    .bg-light-brown { background-color: #d7ccc8; }
-    .bg-black { background-color: #121212; }
-
-    .text-pink { color: #ffb7ce; }
-    .text-blue { color: #0284c7; }
-    .text-light-brown { color: #d7ccc8; }
+    /* Themes (Background + Text matching) */
+    .theme-1 { background-color: #4a3728; color: #ffb7ce; } /* Brown bg, Light Pink text */
+    .theme-2 { background-color: #d7ccc8; color: #0284c7; } /* Light Brown bg, Blue text */
+    .theme-3 { background-color: #ffb7ce; color: #4a3728; } /* Light Pink bg, Brown text */
+    .theme-4 { background-color: #0284c7; color: #eff6ff; } /* Blue bg, Light Blue/White text */
+    .theme-5 { background-color: #ff3b7a; color: #ffffff; } /* Deep Pink bg, White text */
+    .theme-black { background-color: #121212; color: #d7ccc8; } /* Black bg, Light Brown text */
   </style>
 </head>
 <body>
 
   <canvas id="confettiCanvas"></canvas>
 
-  <!-- Background Music (Add your link into the src attribute) -->
-  <!-- Background Music (Add your link into the src attribute) -->
+  <!-- Background Music -->
   <audio id="bgMusic" loop>
-     <source src="constellations-slowedandreverbstudio.mp3" type="audio/mpeg">
-   </audio>
+    <source src="constellations-slowedandreverbstudio.mp3" type="audio/mpeg">
+  </audio>
 
   <!-- SLIDE 1 -->
-  <div class="slide bg-brown active" onclick="nextSlide(event)">
-    <h1 class="text-pink">Hiii Trina</h1>
-    <div class="subtext text-pink" style="opacity: 0.5;">Tap anywhere</div>
+  <div class="slide theme-1 active" onclick="nextSlide(event)">
+    <h1>Hiii Trina</h1>
+    <div class="subtext" style="opacity: 0.6;">Tap anywhere</div>
   </div>
 
   <!-- SLIDE 2 -->
-  <div class="slide bg-light-brown" onclick="nextSlide(event)">
-    <h1 class="text-blue">This is your lil reminder that</h1>
+  <div class="slide theme-2" onclick="nextSlide(event)">
+    <p>This is your lil reminder that</p>
   </div>
 
-  <!-- SLIDE 3 -->
-  <div class="slide bg-light-brown" onclick="nextSlide(event)">
-    <h1 class="text-blue enlarged-text">REALLY</h1>
+  <!-- SLIDE 3 (FIXED SEQUENCE STEP 1) -->
+  <div class="slide theme-3" onclick="nextSlide(event)">
+    <p>You're doing really...</p>
   </div>
 
-  <!-- SLIDE 4 -->
-  <div class="slide bg-light-brown" onclick="nextSlide(event)">
-    <h1 class="text-blue">well</h1>
+  <!-- SLIDE 4 (FIXED SEQUENCE STEP 2) -->
+  <div class="slide theme-5" onclick="nextSlide(event)">
+    <h1 class="enlarged-text">REALLY</h1>
   </div>
 
-  <!-- SLIDE 5 (INPUT FIELD) -->
-  <div class="slide bg-black">
-    <p class="text-light-brown">You've done a total of</p>
+  <!-- SLIDE 5 (FIXED SEQUENCE STEP 3) -->
+  <div class="slide theme-4" onclick="nextSlide(event)">
+    <p>well 💐</p>
+  </div>
+
+  <!-- SLIDE 6 (INPUT FIELD - BLACK THEME) -->
+  <div class="slide theme-black">
+    <p>You've done a total of</p>
     <div class="tq-input-container">
       <input type="number" id="tqCount" class="tq-input" pattern="[0-9]*" inputmode="numeric" placeholder="0">
-      <p class="text-light-brown" style="margin-top:10px;">TQ's so far</p>
+      <p style="margin-top:10px; font-size: 22px;">TQ's so far</p>
       <button class="submit-btn" onclick="handleInputSubmit()">Next</button>
     </div>
   </div>
 
-  <!-- SLIDE 6 (BALLOON POP) -->
-  <div class="slide bg-black" onclick="nextSlide(event)">
+  <!-- SLIDE 7 (BALLOON POP - COMBINED WITH SUBTEXT) -->
+  <div class="slide theme-black" onclick="nextSlide(event)">
     <div id="balloonContainer"></div>
+    <div class="subtext" style="color: #ff3b7a; margin-top: 20px;">Say you swear that's not alot 😭</div>
   </div>
 
-  <!-- SLIDE 7 -->
-  <div class="slide bg-black" onclick="nextSlide(event)">
-    <p class="text-light-brown subtext">Say you swear that's not alot 😭</p>
-  </div>
-
-  <!-- SLIDE 8 -->
-  <div class="slide bg-light-brown" onclick="nextSlide(event)">
-    <h1 class="text-blue" style="font-size: clamp(24px, 5vw, 36px);">And you're there telling me that you think you're not reading enough</h1>
+  <!-- SLIDE 8 (COMBINED MAIN + SUBTEXT) -->
+  <div class="slide theme-2" onclick="nextSlide(event)">
+    <p style="font-size: clamp(22px, 5vw, 34px); padding: 0 10px;">And you're there telling me that you think you're not reading enough</p>
+    <div class="subtext">Nawa for you oh</div>
   </div>
 
   <!-- SLIDE 9 -->
-  <div class="slide bg-light-brown" onclick="nextSlide(event)">
-    <div class="subtext text-blue" style="font-size: 24px;">Nawa for you oh</div>
+  <div class="slide theme-1" onclick="nextSlide(event)">
+    <p>Anyways</p>
   </div>
 
   <!-- SLIDE 10 -->
-  <div class="slide bg-light-brown" onclick="nextSlide(event)">
-    <h1 class="text-blue">Anyways</h1>
+  <div class="slide theme-4" onclick="nextSlide(event)">
+    <p style="font-size: clamp(22px, 5vw, 34px);">If you're ever feeling down or tired, depressed sef</p>
   </div>
 
-  <!-- SLIDE 11 -->
-  <div class="slide bg-light-brown" onclick="nextSlide(event)">
-    <h1 class="text-blue" style="font-size: clamp(24px, 5vw, 36px);">If you're ever feeling down or tired, depressed sef</h1>
+  <!-- SLIDE 11 (COMBINED MAIN + SUBTEXT) -->
+  <div class="slide theme-3" onclick="nextSlide(event)">
+    <p>I want you to know that you've done your best</p>
+    <div class="subtext">What am I even saying</div>
   </div>
 
   <!-- SLIDE 12 -->
-  <div class="slide bg-light-brown" onclick="nextSlide(event)">
-    <h1 class="text-blue">I want you to know that you've done your best</h1>
+  <div class="slide theme-1" onclick="nextSlide(event)">
+    <p style="margin-bottom: 0;">You've done really good</p>
+    <h1 class="enlarged-text" style="color: #ff3b7a; margin-top: 5px;">really</h1>
   </div>
 
   <!-- SLIDE 13 -->
-  <div class="slide bg-light-brown" onclick="nextSlide(event)">
-    <div class="subtext text-blue" style="font-size: 22px;">What am I even saying</div>
+  <div class="slide theme-2" onclick="nextSlide(event)">
+    <p>Don't forget to rest when you can</p>
   </div>
 
-  <!-- SLIDE 14 -->
-  <div class="slide bg-light-brown" onclick="nextSlide(event)">
-    <p class="text-blue" style="font-size: 28px;">You've done really good</p>
-    <h1 class="text-blue enlarged-text" style="margin-top: 10px;">really</h1>
+  <!-- SLIDE 14 (COMBINED MAIN + SUBTEXT) -->
+  <div class="slide theme-5" onclick="nextSlide(event)">
+    <p>You're too pretty to be falling sick</p>
+    <div class="subtext" style="font-size: 28px; font-weight: bold;">Biko 🤲🏾</div>
   </div>
 
-  <!-- SLIDE 15 -->
-  <div class="slide bg-light-brown" onclick="nextSlide(event)">
-    <h1 class="text-blue">Don't forget to rest when you can</h1>
+  <!-- SLIDE 15 (COMBINED MAIN + SUBTEXT) -->
+  <div class="slide theme-4" onclick="nextSlide(event)">
+    <p style="font-size: clamp(20px, 4.5vw, 32px);">As for me, I'm just gonna stick to my way of reading</p>
+    <div class="subtext">So don’t worry about me 🫶🏾</div>
   </div>
 
-  <!-- SLIDE 16 -->
-  <div class="slide bg-light-brown" onclick="nextSlide(event)">
-    <h1 class="text-blue" style="font-size: clamp(26px, 5vw, 40px);">You're too pretty to be falling sick</h1>
-  </div>
-
-  <!-- SLIDE 17 -->
-  <div class="slide bg-light-brown" onclick="nextSlide(event)">
-    <div class="subtext text-blue" style="font-size: 26px; font-weight: bold;">Biko 🤲🏾</div>
-  </div>
-
-  <!-- SLIDE 18 -->
-  <div class="slide bg-light-brown" onclick="nextSlide(event)">
-    <h1 class="text-blue" style="font-size: clamp(22px, 4.5vw, 34px);">As for me, I'm just gonna stick to my way of reading</h1>
-  </div>
-
-  <!-- SLIDE 19 -->
-  <div class="slide bg-light-brown" onclick="nextSlide(event)">
-    <div class="subtext text-blue" style="font-size: 22px;">So don’t worry about me 🫶🏾</div>
-  </div>
-
-  <!-- SLIDE 20 (FINAL) -->
-  <div class="slide bg-brown">
-    <h1 class="text-pink">Best of Luck, Trina!</h1>
-    <div class="subtext text-pink" style="font-size: 26px;">You go dey okay 🫂</div>
+  <!-- SLIDE 16 (FINAL - WITH CONFETTI) -->
+  <div class="slide theme-1">
+    <h1>Best of Luck, Trina!</h1>
+    <div class="subtext" style="font-size: 28px; color: #ff3b7a;">You go dey okay 🫂</div>
   </div>
 
   <script>
@@ -269,9 +254,8 @@
     function nextSlide(event) {
       if (event) event.stopPropagation();
       
-      // Start music on the very first touch action
       if (!musicStarted && music) {
-        music.play().catch(e => console.log("Audio play blocked or missing src"));
+        music.play().catch(e => console.log("Audio play system constraint"));
         musicStarted = true;
       }
 
@@ -280,7 +264,6 @@
         currentSlideIndex++;
         slides[currentSlideIndex].classList.add('active');
 
-        // Trigger confetti automatically if it's the last slide
         if (currentSlideIndex === slides.length - 1) {
           triggerFinalConfetti();
         }
@@ -291,10 +274,8 @@
       const val = document.getElementById('tqCount').value || "0";
       const container = document.getElementById('balloonContainer');
       
-      // Inject the balloon text dynamically into Slide 6
       container.innerHTML = `<span class="balloon-num">${val}</span>`;
       
-      // Move forward
       nextSlide();
     }
 
@@ -303,7 +284,7 @@
     const confettiInstance = confetti.create(confettiCanvas, { resize: true, useWorker: true });
 
     function triggerFinalConfetti() {
-      const duration = 3000;
+      const duration = 3500;
       const animationEnd = Date.now() + duration;
       const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 9999 };
 
