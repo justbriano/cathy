@@ -208,10 +208,11 @@
     </div>
   </div>
 
-  <!-- SLIDE 7 (BALLOON POP) -->
+  <!-- SLIDE 7 (BALLOON POP - DYNAMIC RESPONSE) -->
   <div class="slide theme-black" data-has-subtext="true" onclick="handleTap(event)">
     <div id="balloonContainer"></div>
-    <div class="subtext" style="color: #ff3b7a; font-weight: bold;">Say you swear that's not alot 😭</div>
+    <!-- ID added here so JavaScript can change the text layout dynamically -->
+    <div class="subtext" id="dynamicPunchline" style="color: #ff3b7a; font-weight: bold;">Say you swear that's not alot 😭</div>
   </div>
 
   <!-- SLIDE 8 -->
@@ -271,11 +272,29 @@
     const music = document.getElementById('bgMusic');
     let musicStarted = false;
 
+    // Smooth linear volume fade-in strategy
+    function fadeInAudio(audioElement, durationMs) {
+      audioElement.volume = 0;
+      audioElement.play().catch(e => console.log("Audio play blocked"));
+      
+      const intervalPeriod = 50; 
+      const step = intervalPeriod / durationMs;
+      
+      const fadeInterval = setInterval(() => {
+        if (audioElement.volume + step >= 1) {
+          audioElement.volume = 1;
+          clearInterval(fadeInterval);
+        } else {
+          audioElement.volume += step;
+        }
+      }, intervalPeriod);
+    }
+
     function handleTap(event) {
       if (event) event.stopPropagation();
       
       if (!musicStarted && music) {
-        music.play().catch(e => console.log("Audio waiting for user gesture"));
+        fadeInAudio(music, 2000); // Fades in smoothly over 2 seconds
         musicStarted = true;
       }
 
@@ -303,10 +322,23 @@
     }
 
     function handleInputSubmit() {
-      const val = document.getElementById('tqCount').value || "0";
+      const inputElement = document.getElementById('tqCount');
+      const val = parseInt(inputElement.value, 10) || 0;
       const container = document.getElementById('balloonContainer');
+      const punchline = document.getElementById('dynamicPunchline');
       
       container.innerHTML = `<span class="balloon-num">${val}</span>`;
+      
+      // Dynamic conversational logic processing her typed metric
+      if (val <= 5 && val > 0) {
+        punchline.innerText = "Only because you're a perfectionist, say you swear that's not alot 😭";
+      } else if (val > 40) {
+        punchline.innerText = "Omo, absolute overachiever! Say you swear that's not alot 😭";
+      } else if (val === 0) {
+        punchline.innerText = "Even if it's zero right now, say you swear the workload isn't alot 😭";
+      } else {
+        punchline.innerText = "Say you swear that's not alot 😭";
+      }
       
       slides[currentSlideIndex].classList.remove('active');
       currentSlideIndex++;
